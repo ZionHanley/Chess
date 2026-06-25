@@ -2,7 +2,7 @@ package ChessPieces;
 
 public abstract class Pieces {
 
-    /*//White Chess pieces
+    //White Chess pieces
     char Kingw = 9812;
     char Queenw = 9813;
     char Rookw = 9814;
@@ -16,7 +16,7 @@ public abstract class Pieces {
     char Rookb = 9820;
     char Bishopb = 9821;
     char Knightb = 9822;
-    char Pawnb = 9823;*/
+    char Pawnb = 9823;
 
     protected char symbol;
     protected Boolean white;
