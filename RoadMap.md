@@ -3,13 +3,15 @@
 ### Beta 0.1.1
 
 Foucusing on creating the board and the piece, for now this will all be shown in terminal but will eventually the data will be used to create a GUI on a weppage.
-    - Create the Board
+    - ~~Create the Board~~
     - Create pieces and thier movement abilies
-    - Distingish team colors
+    - ~~Distingish team colors~~
+    - Allow pieaces to capture others
+    - Have diffrent turns
     - Show captured pieces for each player
     - Show highlighted possible moves for each piece
     - Implement special moves
-    - Flip the board for the alternate perspective
+    - ~~Flip the board for the alternate perspective~~
 
 ### Beta 0.1.2
 
