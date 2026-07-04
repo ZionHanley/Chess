@@ -1,51 +1,38 @@
 import ChessPieces.Pieces;
+import java.util.ArrayList;
 
 public class Board {
 
     public static int ID = 0;
-    public static final Pieces[][] GameBoard = new Pieces[8][8];
-    // Add this so that the size of the board can be dynamic in the future for what ever reason.
-    int size = GameBoard.length;
+    public final Pieces[][] GameBoard = new Pieces[8][8];
+    public final ArrayList<Integer> MoveHistory = new ArrayList<>();
+    int size = GameBoard.length; // Added this so that the size of the board can be dynamic in the future for what ever reason.
 
     public Board() {
         ID++;
     }
 
-    //getters
+    // Getters
 
-    public static Pieces getPiece(int file, int rank) {
+    public Pieces getPiece(int file, int rank) {
             return GameBoard[file][rank];
     }
 
-    //issers
-
-    public boolean isInBounds(int file, int rank) {
-        return file >= 0 && file < size && rank >= 0 && rank < size;
+    public int getLastMove() {
+        if (MoveHistory.isEmpty()) {
+            return -1; // or throw an exception, depending on your needs
+        }
+        return MoveHistory.get(MoveHistory.size() - 1);
     }
 
-    //setters
-
-    public void setPiece(int file, int rank, Pieces piece) {
-        GameBoard[file][rank] = piece;
-    }
-
-    public void setBoard() {
-
+    public ArrayList<Integer> getAllMoves() {
+        return MoveHistory;
     }
 
     public void printTile(int file, int rank) {
-        System.out.println(Board.getPiece(file, rank));
-    }
+        System.out.println(this.getPiece(file, rank));
+    }   
 
-    public void printArray() {
-        for (Pieces[] row : GameBoard) {
-            for (Pieces piece : row) {
-                System.out.print(piece + " ");
-            }
-            System.out.println();
-        }
-    }
-    
     public void print() {
         System.out.println("( GameBoard " + ID + " ) " + "\u2500".repeat(50));
         
@@ -61,7 +48,7 @@ public class Board {
 
         for (int i = size - 1; i >= 0; i--) {
             for (int j = 0; j < size; j++) {
-                Pieces value = Board.getPiece(i,j);
+                Pieces value = this.getPiece(i,j);
 
                 if (value == null) {System.out.print("[ " + " " + " ]");}
                 else {System.out.print("[ " + value.getSymbol() + " ]");}
@@ -72,8 +59,7 @@ public class Board {
         System.out.println("\u2500".repeat(66));
     }
 
-    // Prints the board in the alternate view so i can switch perspectives for different players
-    public void printReverse() {
+    public void printReverse() { // Prints the board in the alternate view so i can switch perspectives for different players
         System.out.println("( GameBoard " + ID + " ) " + "\u2500".repeat(50));
         
         // This gives the board the first letter to print out the files.
@@ -88,7 +74,7 @@ public class Board {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                Pieces value = Board.getPiece(i,j);
+                Pieces value = this.getPiece(i,j);
 
                 if (value == null) {System.out.print("[ " + " " + " ]");}
                 else {System.out.print("[ " + value.getSymbol() + " ]");}
@@ -99,4 +85,58 @@ public class Board {
         System.out.println("\u2500".repeat(66));
     }
 
+    public void printPieces() {
+        for (int i = 0; i < this.GameBoard.length; i++) {
+            for (int j = 0; j < this.GameBoard[i].length; j++) {
+                Pieces piece = this.getPiece(i, j);
+                if (piece != null) {
+                    System.out.println("Piece at (" + i + ", " + j + "): " + piece.getSymbol());
+                }
+            }
+        }
+    }
+
+    // Setters
+
+    public void setPiece(int file, int rank, Pieces piece) {
+        GameBoard[file][rank] = piece;
+    }
+
+    public void movePiece(int startFile, int startRank, int endFile, int endRank) {
+        Pieces piece = getPiece(startFile, startRank);
+        if (piece != null && isInBounds(endFile, endRank)) {
+            setPiece(endFile, endRank, piece);
+            setPiece(startFile, startRank, null);
+            piece.setTile(endFile, endRank); // Update the piece's internal position
+        } else {
+            System.err.println("Invalid move.");
+        }
+    }
+
+    public boolean isInBounds(int file, int rank) {
+        return file >= 0 && file < size && rank >= 0 && rank < size;
+    }
+
+    public boolean isCheck() {
+        // TODO: Implement check detection logic
+        return false;
+    }
+
+    public boolean isCheckmate() {
+        // TODO: Implement checkmate detection logic
+        return false;
+    }
+
+    public boolean  isDraw() {
+        // TODO: Implement draw detection logic
+        return false;
+    }
+
+    public void setBoard() {
+        
+    }
+
+    public void setMoveHistory(int move) {
+        MoveHistory.add(move);
+    }
 }
