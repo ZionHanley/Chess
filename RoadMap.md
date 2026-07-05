@@ -7,7 +7,7 @@ Foucusing on creating the board and the piece, for now this will all be shown in
     - Create pieces and thier movement abilies
     - ~~Distingish team colors~~
     - Allow pieaces to capture others
-    - Have diffrent turns
+    - ~~Have diffrent turns~~
     - Show captured pieces for each player
     - Show highlighted possible moves for each piece
     - Implement special moves

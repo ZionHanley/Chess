@@ -18,7 +18,7 @@ public class GameState {
 
     public GameState() {
 
-        myObjBoard.setBoard(); // Figure out how to set the board with pieces in their starting positions.
+        myObjBoard.setBoard(); // TODO: Figure out how to set the board with pieces in their starting positions.
     }
 
     public void update() {
@@ -85,7 +85,7 @@ public class GameState {
             checkMove();
 
             activePiece = myObjBoard.getPiece(move[0], move[1]);
-
+        // TODO: Implement all logic checks from board class
         if (activePiece.isTileValid(move[0], move[1], move[2], move[3]) && myObjBoard.isInBounds(move[2], move[3])) {
             myObjBoard.movePiece(move[0], move[1], move[2], move[3]); break;
         } else { System.out.println("Invalid move. Please try again.");}

@@ -8,9 +8,14 @@ public class Board {
     public final ArrayList<Integer> MoveHistory = new ArrayList<>();
     int size = GameBoard.length; // Added this so that the size of the board can be dynamic in the future for what ever reason.
 
+    public boolean isCheck = false;
+    public boolean isCheckmate = false;
+
     public Board() {
         ID++;
     }
+
+    //TODO: Implement methods for setting up the board and checking game state (check, checkmate, draw).
 
     // Getters
 
@@ -128,6 +133,11 @@ public class Board {
     }
 
     public boolean  isDraw() {
+        // TODO: Implement draw detection logic
+        return false;
+    }
+
+    public boolean  isStalemate() {
         // TODO: Implement draw detection logic
         return false;
     }
