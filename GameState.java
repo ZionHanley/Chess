@@ -1,4 +1,5 @@
 
+import ChessPieces.King;
 import ChessPieces.Pieces;
 import java.util.ArrayList;
 
@@ -6,10 +7,13 @@ public class GameState {
     Board myObjBoard = new Board();
 
     boolean colorFlag = true;
+    String command;
 
     int[] move;
 
     Pieces activePiece;
+    King k1 = new King(true);
+    King k2 = new King(false);
 
     @SuppressWarnings("unused")
     ArrayList<Pieces> WhiteCaptured = new ArrayList<>();
@@ -19,11 +23,25 @@ public class GameState {
     public GameState() {
 
         myObjBoard.setBoard(); // TODO: Figure out how to set the board with pieces in their starting positions.
+        myObjBoard.setPiece(0, 0, k1);
+        myObjBoard.setPiece(7, 0, k2);
+
     }
 
     public void update() {
 
+        switch (command) {
+            case :
+                
+                break;
+            default:
+                throw new AssertionError();
+        }
+
         printBoard(colorFlag); // Print the board and indicate whose turn it is.
+
+        //TODO: instead of expecting a move set up the logic to ask for command first
+
         
         validateMove(); // Input -> checkMove() -> validateMove() 
         // Need to implement check and checkmate detection
