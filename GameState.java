@@ -30,27 +30,39 @@ public class GameState {
 
     public void update() {
 
-        switch (command) {
-            case :
-                
-                break;
-            default:
-                throw new AssertionError();
-        }
-
         printBoard(colorFlag); // Print the board and indicate whose turn it is.
 
-        //TODO: instead of expecting a move set up the logic to ask for command first
+        System.out.print("Enter command | select | move | highlight | ... "); command = System.console().readLine();
 
-        
-        validateMove(); // Input -> checkMove() -> validateMove() 
-        // Need to implement check and checkmate detection
+        switch (command) {
+            case "highlight" -> System.err.println("Feature not yet implemented");
+            case "move" -> { // TODO: Add logic to check for check, checkmate, and draw conditions here.
 
-        switchTurns(); // Switch turns
+                if (activePiece == null) {
+                    System.err.println("No Piece selected");
+                    continue;
+                } else {
 
-        // TODO: Add logic to check for check, checkmate, and draw conditions here.
+                    // Need to implement check and checkmate detection
+                    validateMove(); // Input -> checkMove() -> validateMove() 
+                    
+                    System.out.println("Position shifted");
+                    
+                }
+            }
+            case "select" -> {
+                
+                getUserInput();
+                System.err.println("Piece selected");
 
+            }
+            default -> { System.out.println("Invaliad command"); throw new AssertionError();}
+        }
+
+        switchTurns();
     }
+
+    // TODO: decide if I should move all these methods to the board class
 
     private void getUserInput() {
 
@@ -81,7 +93,7 @@ public class GameState {
 
         while(true) {
 
-            getUserInput();
+            //getUserInput();
 
             // Check if the selected piece belongs to the current player
             if (myObjBoard.getPiece(move[0], move[1]) != null) {
