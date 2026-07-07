@@ -3,8 +3,6 @@ package ChessPieces;
 
 public abstract class Pieces {
 
-    public int file;
-    public int rank;
     public char symbol;
     public boolean white;
 
@@ -17,10 +15,6 @@ public abstract class Pieces {
 
     public char getSymbol() {
         return this.symbol;
-    }
-
-    public void getTile() {
-        System.out.println("File: " + this.file + " Rank: " + this.rank);
     }
 
     public abstract void getValidTiles();
@@ -38,10 +32,7 @@ public abstract class Pieces {
 
     //setters
 
-    public void setTile(int file, int rank) {
-        this.file = file;
-        this.rank = rank;
-    }
+    //TODO: Make a method for changing symbol incase of the chess haracters not being supported by the console.
 
     public void setSymbol(char symbol) {
         

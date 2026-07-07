@@ -1,3 +1,4 @@
+import ChessPieces.King;
 import ChessPieces.Pieces;
 import java.util.ArrayList;
 
@@ -10,6 +11,9 @@ public class Board {
 
     public boolean isCheck = false;
     public boolean isCheckmate = false;
+
+    King k1 = new King(true);
+    King k2 = new King(false);
 
     public Board() {
         ID++;
@@ -112,7 +116,6 @@ public class Board {
         if (piece != null && isInBounds(endFile, endRank)) {
             setPiece(endFile, endRank, piece);
             setPiece(startFile, startRank, null);
-            piece.setTile(endFile, endRank); // Update the piece's internal position
         } else {
             System.err.println("Invalid move.");
         }
@@ -143,7 +146,8 @@ public class Board {
     }
 
     public void setBoard() {
-        
+        GameBoard[0][3] = k1; // White King
+        GameBoard[7][3] = k2; // Black King
     }
 
     public void setMoveHistory(int move) {
