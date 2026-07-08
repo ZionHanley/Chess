@@ -13,6 +13,8 @@ public class GameState {
 
     Pieces activePiece;
 
+    int num = Character.toUpperCase('a') - 64;
+
     @SuppressWarnings("unused")
     ArrayList<Pieces> WhiteCaptured = new ArrayList<>();
     @SuppressWarnings("unused")
@@ -21,7 +23,6 @@ public class GameState {
     //Files are numbers and Ranks are letters.
 
     public GameState() {
-
         myObjBoard.setBoard(); // TODO: Figure out how to set the board with pieces in their starting positions.
 
     }
@@ -29,6 +30,8 @@ public class GameState {
     //TODO: Make it so after a successful comand it clears the console and prints the successful message only untill a key is pressed
 
     public void update() {
+
+        clearScreen(); // Clear the console for a fresh display.
 
         printBoard(colorFlag); // Print the board and indicate whose turn it is.
 
@@ -52,16 +55,14 @@ public class GameState {
                     return;
                 } else {
                     // Need to implement check and checkmate detection
+                    System.out.print("Enter your move: "); // Use spaced out numbers for the format
                     validateMove(); // Input -> checkMove() -> validateMove()
-                    System.out.println("Position shifted");
                 }
             }
             case "select" -> { // TODO: Fix switching turns when selecting a piece. Currently, it switches turns even if the selection is invalid.
-                
+                System.out.print("Enter your selection: "); // Use spaced out numbers for the format
                 getSelectInput();
-                System.out.println("Piece selected");
                 return;
-
             }
             default -> { 
                 System.err.println("Invaliad command");
@@ -74,17 +75,19 @@ public class GameState {
 
     // TODO: decide if I should move all these methods to the board class
 
-    private void getSelectInput() {
+    public static void clearScreen() {  
+        System.out.println();
+    }
 
+    private void getSelectInput() {
         while (true) {
-            System.out.print("Enter your selection: "); // Use spaced out numbers for the format
             String moveTerminal = System.console().readLine();
             String[] parts = moveTerminal.split(" ");
 
             if (parts.length == 2) {
                 try {
                     selection = new int[] { // Adjust for 0-based indexing
-                        Integer.parseInt(parts[0]) - 1,
+                        Character.toUpperCase(parts[0].charAt(0)) - 'A',
                         Integer.parseInt(parts[1]) - 1
                     };
                     activePiece = myObjBoard.getPiece(selection[0], selection[1]);
@@ -93,30 +96,27 @@ public class GameState {
                     System.out.println("Invalid input. Please enter numbers only.");
                 }
             } else {
-                System.out.println("Invalid input format. Please enter exactly four numbers.");
+                System.out.println("Invalid input format.  Rank and File ie A 1.");
             }
         }
     }
 
     private void getMoveInput() {
-
         while (true) {
-            System.out.print("Enter your move: "); // Use spaced out numbers for the format
             String moveTerminal = System.console().readLine();
             String[] parts = moveTerminal.split(" ");
 
             if (parts.length == 2) {
                 try {
                     move = new int[] {
-                        Integer.parseInt(parts[0]) - 1,
+                        Character.toUpperCase(parts[0].charAt(0)) - 'A',
                         Integer.parseInt(parts[1]) - 1
-                    };
-                    break; // Exit the loop if input is valid
+                    }; break; // Exit the loop if input is valid
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input. Please enter numbers only.");
                 }
             } else {
-                System.out.println("Invalid input format. Please enter exactly four numbers.");
+                System.out.println("Invalid input format. Rank and File ie A 1");
             }
         }
     }
@@ -131,7 +131,7 @@ public class GameState {
             if (myObjBoard.getPiece(selection[0],selection[1]) != null) {
                 
                 if (myObjBoard.getPiece(selection[0], selection[1]).isWhite() == colorFlag) {
-                    System.out.println("validation passed"); break;
+                    break;
                 } else {System.out.println("You cannot move your opponent's piece. Please try again.");}
                 if (! myObjBoard.getPiece(selection[0], selection[1]).isWhite() == ! colorFlag) {
                     System.out.println("validation passed"); break;

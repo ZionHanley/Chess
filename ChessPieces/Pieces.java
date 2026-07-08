@@ -17,15 +17,13 @@ public abstract class Pieces {
         return this.symbol;
     }
 
-    public abstract void getValidTiles();
-
     //issers
 
     public boolean isWhite() {
         return this.white;
     }
 
-    public boolean isTileValid(int startfile, int startrank, int endfile, int endrank) {
+    public boolean isTileValid(int starRank, int startFile, int endRank, int endFile) {
         // Default implementation - can be overridden by subclasses
         return true;
     }
