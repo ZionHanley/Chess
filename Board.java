@@ -7,6 +7,8 @@ public class Board {
     public static int ID = 0;
     public final Pieces[][] GameBoard = new Pieces[8][8];
     public final ArrayList<Integer> MoveHistory = new ArrayList<>();
+    ArrayList<Pieces> WhiteCaptured = new ArrayList<>();
+    ArrayList<Pieces> BlackCaptured = new ArrayList<>();
     int size = GameBoard.length; // Added this so that the size of the board can be dynamic in the future for what ever reason.
 
     public boolean isCheck = false;
@@ -19,7 +21,6 @@ public class Board {
         ID++;
     }
 
-    //TODO: Implement methods for setting up the board and checking game state (check, checkmate, draw).
 
     // Getters
 
@@ -121,54 +122,41 @@ public class Board {
         }
     }
 
-    public boolean isInBounds(int rank, int file) {
+    private boolean isInBounds(int rank, int file) {
         return file >= 0 && file < size && rank >= 0 && rank < size;
     }
 
-    public boolean isCheck() {
+    private boolean isCheck() {
         // TODO: Implement check detection logic
         return false;
     }
 
-    public boolean isCheckmate() {
+    private boolean isCheckmate() {
         // TODO: Implement checkmate detection logic
         return false;
     }
 
-    public boolean  isDraw() {
+    private boolean  isDraw() {
         // TODO: Implement draw detection logic
         return false;
     }
 
-    public boolean  isStalemate() {
+    private boolean  isStalemate() {
         // TODO: Implement draw detection logic
         return false;
     }
 
-    public boolean validateMove(int[] move, Pieces activPieces) { // TODO: Implement move validation logic
-
-        //TODO: combine these two checks and add the isTileValid method from the Pieces class
-    while(true) {
-
-        // Check if the selected piece belongs to the current player
-        if (myObjBoard.getPiece(selection[0],selection[1]) != null) {
+    public boolean validateMove(int[] selection, int[] move, boolean colorFlag, Pieces activePieces) {
+        // TODO: add all private methods
+        if (activePieces != null) {
             
-            if (myObjBoard.getPiece(selection[0], selection[1]).isWhite() == colorFlag) {
-                break;
-            } else {System.out.println("You cannot move your opponent's piece. Please try again.");}
-            if (! myObjBoard.getPiece(selection[0], selection[1]).isWhite() == ! colorFlag) {
-                System.out.println("validation passed"); break;
-            } else {System.out.println("You cannot move your opponent's piece. Please try again.");}
-            
-        } else System.out.println("No piece at the selected tile. Please try again.");
-
-        // TODO: Implement all logic checks from board class
-        if (activePiece.isTileValid(selection[0], selection[1], move[0], move[1]) && myObjBoard.isInBounds(move[0], move[1])) {
-            myObjBoard.movePiece(selection[0], selection[1], move[0], move[1]); break;
-        } else { System.out.println("Invalid move. Please try again.");}
-        }
-
-        return true;
+            if (activePieces.isWhite() == colorFlag) {
+                
+                if (activePieces.isTileValid(selection[0], selection[1], move[0], move[1]) && isInBounds(move[0], move[1])) {
+                    return true;
+                } return false;
+            } System.err.println("Wrong color"); return false;
+        } System.err.println("No piece at the selected tile"); return false;
     }
 
     public void setBoard() {
@@ -181,5 +169,10 @@ public class Board {
 
     public void setMoveHistory(int move) {
         MoveHistory.add(move);
+    }
+
+    public void highlightMoves(Pieces activePiece) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'highlightMoves'");
     }
 }

@@ -1,29 +1,20 @@
 
 import ChessPieces.Pieces;
-import java.util.ArrayList;
 
 public class GameState {
+
     Board myObjBoard = new Board();
+    Pieces activePiece;
 
-    boolean colorFlag = true;
     String command;
-
+    boolean colorFlag = true;
     int[] selection;
     int[] move;
 
-    Pieces activePiece;
-
-    int num = Character.toUpperCase('a') - 64;
-
-    @SuppressWarnings("unused")
-    ArrayList<Pieces> WhiteCaptured = new ArrayList<>();
-    @SuppressWarnings("unused")
-    ArrayList<Pieces> BlackCaptured = new ArrayList<>();
-
-    //Files are numbers and Ranks are letters.
+    // Ranks are letters and Files are numbers
 
     public GameState() {
-        myObjBoard.setBoard(); // TODO: Figure out how to set the board with pieces in their starting positions.
+        myObjBoard.setBoard();
 
     }
 
@@ -31,39 +22,65 @@ public class GameState {
 
     public void update() {
 
-        clearScreen(); // Clear the console for a fresh display.
+        // clearScreen(); // TODO: Figure out how to clear the console or just use print statments
 
-        printBoard(colorFlag); // Print the board and indicate whose turn it is.
+        printBoard(colorFlag);
 
-        System.out.print("Enter command | select | move | highlight | ... "); command = System.console().readLine();
+        System.out.print("Enter command | select | move | highlight | quit | ... "); command = System.console().readLine();
 
-        switch (command) {
+        switch (command.toLowerCase()) {
+
             case "highlight" -> {
                 
                 if (activePiece == null) {
                     System.err.println("No Piece selected");
                 } else {
-                    highlightMoves(); // TODO: Implement logic to highlight possible moves for the selected piece.
-                    System.out.println("Posibble moves shown");
+                    myObjBoard.highlightMoves(activePiece);
                 }
                 return;
             }
-            case "move" -> { // TODO: Add logic to check for check, checkmate, and draw conditions here.
+
+            case "move" -> {
 
                 if (activePiece == null) {
                     System.err.println("No Piece selected");
                     return;
                 } else {
-                    // Need to implement check and checkmate detection
-                    System.out.print("Enter your move: "); // Use spaced out numbers for the format
-                    validateMove(); // Input -> checkMove() -> validateMove()
+
+                    while (true) {
+                        System.out.print("Enter your move: "); // Use spaced out numbers for the format
+                        getMoveInput();
+                        if (myObjBoard.validateMove(selection, move, colorFlag, activePiece)) {
+                            myObjBoard.movePiece(selection[0], selection[1], move[0], move[1]);
+                            break; // Exit the loop if the move is valid
+                        } else {
+                            System.err.println("Invalid move. Please try again.");
+                        }
+                    }
                 }
             }
-            case "select" -> { // TODO: Fix switching turns when selecting a piece. Currently, it switches turns even if the selection is invalid.
+
+            case "select" -> {
+
                 System.out.print("Enter your selection: "); // Use spaced out numbers for the format
                 getSelectInput();
                 return;
             }
+
+            case "quit" -> {
+
+                System.out.print("Are you sure you want to exit? (y/n) ");
+                String exitConfirm = System.console().readLine();
+                if (exitConfirm.equalsIgnoreCase("y")) {
+                    System.out.println("Exiting the game...");
+                    System.exit(0);
+                } else {
+                    System.out.println("Exit canceled.");
+                    return;
+                }
+                
+            }
+
             default -> { 
                 System.err.println("Invaliad command");
                 return;
@@ -71,12 +88,6 @@ public class GameState {
         }
 
         switchTurns();
-    }
-
-    // TODO: decide if I should move all these methods to the board class
-
-    public static void clearScreen() {  
-        System.out.println();
     }
 
     private void getSelectInput() {
@@ -121,38 +132,6 @@ public class GameState {
         }
     }
 
-    private void checkMove() {
-
-        while(true) {
-
-            getMoveInput();
-
-            // Check if the selected piece belongs to the current player
-            if (myObjBoard.getPiece(selection[0],selection[1]) != null) {
-                
-                if (myObjBoard.getPiece(selection[0], selection[1]).isWhite() == colorFlag) {
-                    break;
-                } else {System.out.println("You cannot move your opponent's piece. Please try again.");}
-                if (! myObjBoard.getPiece(selection[0], selection[1]).isWhite() == ! colorFlag) {
-                    System.out.println("validation passed"); break;
-                } else {System.out.println("You cannot move your opponent's piece. Please try again.");}
-                
-            } else System.out.println("No piece at the selected tile. Please try again.");
-        }
-    }
-
-    private void validateMove() {
-
-        while (true) {
-            checkMove();
-
-            // TODO: Implement all logic checks from board class
-            if (activePiece.isTileValid(selection[0], selection[1], move[0], move[1]) && myObjBoard.isInBounds(move[0], move[1])) {
-                myObjBoard.movePiece(selection[0], selection[1], move[0], move[1]); break;
-            } else { System.out.println("Invalid move. Please try again.");}
-        }
-    }
-
     private void switchTurns() {
         colorFlag = !colorFlag;
     }
@@ -165,8 +144,7 @@ public class GameState {
         }
     }
 
-    private void highlightMoves() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public static void clearScreen() {  
+        System.out.println();
     }
-
 }
