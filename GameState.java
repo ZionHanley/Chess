@@ -1,5 +1,6 @@
 
 import ChessPieces.Pieces;
+import java.io.IOException;
 
 public class GameState {
 
@@ -22,7 +23,7 @@ public class GameState {
 
     public void update() {
 
-        // clearScreen(); // TODO: Figure out how to clear the console or just use print statments
+        clearScreen();
 
         printBoard(colorFlag);
 
@@ -136,15 +137,24 @@ public class GameState {
         colorFlag = !colorFlag;
     }
 
+    public static void clearScreen() { 
+        try {
+            new ProcessBuilder("clear")
+            .inheritIO()
+            .start()
+            .waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void printBoard(boolean colorFlag) {
         if (colorFlag) {
             myObjBoard.print(); System.out.println("White's turn");
         } else {
             myObjBoard.printReverse(); System.out.println("Black's turn");
         }
-    }
-
-    public static void clearScreen() {  
-        System.out.println();
     }
 }
