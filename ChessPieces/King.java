@@ -11,6 +11,7 @@ public class King extends Pieces{
         // Implement castling logic here
         return false;
     }
+    
     @Override
     public boolean isTileValid(int startRank, int startFile, int endRank, int endFile) {
         int fileDiff = Math.abs(endFile - startFile);

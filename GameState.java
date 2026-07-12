@@ -6,20 +6,14 @@ public class GameState {
 
     Board myObjBoard = new Board();
     Pieces activePiece;
-
     String command;
     boolean colorFlag = true;
     int[] selection;
     int[] move;
 
-    // Ranks are letters and Files are numbers
-
     public GameState() {
         myObjBoard.setBoard();
-
     }
-
-    //TODO: Make it so after a successful comand it clears the console and prints the successful message only untill a key is pressed
 
     public void update() {
 
@@ -32,7 +26,6 @@ public class GameState {
         switch (command.toLowerCase()) {
 
             case "highlight" -> {
-                
                 if (activePiece == null) {
                     System.err.println("No Piece selected");
                 } else {
@@ -42,12 +35,10 @@ public class GameState {
             }
 
             case "move" -> {
-
                 if (activePiece == null) {
                     System.err.println("No Piece selected");
                     return;
                 } else {
-
                     while (true) {
                         System.out.print("Enter your move: "); // Use spaced out numbers for the format
                         getMoveInput();
@@ -62,14 +53,12 @@ public class GameState {
             }
 
             case "select" -> {
-
                 System.out.print("Enter your selection: "); // Use spaced out numbers for the format
                 getSelectInput();
                 return;
             }
 
             case "quit" -> {
-
                 System.out.print("Are you sure you want to exit? (y/n) ");
                 String exitConfirm = System.console().readLine();
                 if (exitConfirm.equalsIgnoreCase("y")) {
@@ -79,7 +68,6 @@ public class GameState {
                     System.out.println("Exit canceled.");
                     return;
                 }
-                
             }
 
             default -> { 
@@ -91,7 +79,7 @@ public class GameState {
         switchTurns();
     }
 
-    private void getSelectInput() {
+    private void getSelectInput() { // Ranks are letters and Files are numbers
         while (true) {
             String moveTerminal = System.console().readLine();
             String[] parts = moveTerminal.split(" ");
@@ -112,7 +100,6 @@ public class GameState {
             }
         }
     }
-
     private void getMoveInput() {
         while (true) {
             String moveTerminal = System.console().readLine();
@@ -132,12 +119,10 @@ public class GameState {
             }
         }
     }
-
     private void switchTurns() {
         colorFlag = !colorFlag;
     }
-
-    public static void clearScreen() { 
+    private void clearScreen() { 
         try {
             new ProcessBuilder("clear")
             .inheritIO()
@@ -149,7 +134,6 @@ public class GameState {
             e.printStackTrace();
         }
     }
-
     private void printBoard(boolean colorFlag) {
         if (colorFlag) {
             myObjBoard.print(); System.out.println("White's turn");

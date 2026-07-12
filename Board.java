@@ -7,12 +7,14 @@ public class Board {
     public static int ID = 0;
     public final Pieces[][] GameBoard = new Pieces[8][8];
     public final ArrayList<Integer> MoveHistory = new ArrayList<>();
-    ArrayList<Pieces> WhiteCaptured = new ArrayList<>();
-    ArrayList<Pieces> BlackCaptured = new ArrayList<>();
+    public final ArrayList<Pieces> WhiteCaptured = new ArrayList<>();
+    public final ArrayList<Pieces> BlackCaptured = new ArrayList<>();
     int size = GameBoard.length; // Added this so that the size of the board can be dynamic in the future for what ever reason.
 
     public boolean isCheck = false;
     public boolean isCheckmate = false;
+    public boolean whiteCastle = true;
+    public boolean blackCastle = true;
 
     King k1 = new King(true);
     King k2 = new King(false);
@@ -20,7 +22,6 @@ public class Board {
     public Board() {
         ID++;
     }
-
 
     // Getters
 
