@@ -29,6 +29,10 @@ public class Board {
             return GameBoard[file][rank];
     }
 
+    public ArrayList<Integer> getPossibleMove() {
+        return MoveHistory;
+    }
+
     public int getLastMove() {
         if (MoveHistory.isEmpty()) {
             return -1; // or throw an exception, depending on your needs
@@ -36,7 +40,7 @@ public class Board {
         return MoveHistory.get(MoveHistory.size() - 1);
     }
 
-    public ArrayList<Integer> getAllMoves() {
+    public ArrayList<Integer> getMoveHistory() {
         return MoveHistory;
     }
 
@@ -107,6 +111,59 @@ public class Board {
         }
     }
 
+    public void printHighlight(int rank, int file, Pieces activePiece, boolean colorFlag) {
+        // TODO: run all tiles through the isTileValiad method of the piece and where there is a valid move, highlight it on the board. This will be done by changing the color of the tile to a different color.
+        
+        if (colorFlag) {
+            System.out.println("( GameBoard " + ID + " ) " + "\u2500".repeat(50));
+            
+            Character x = 65;
+            int num = size;
+
+            for (int i = 0; i < size; i++) {
+                System.out.print("| " + x++ + " |");
+            }
+            System.out.println("");
+
+            for (int i = size - 1; i >= 0; i--) {
+                for (int j = 0; j < size; j++) {
+                    Pieces value = this.getPiece(j,i);
+                    if (activePiece.isTileValid(rank, file, j, i)) {{System.out.print("[ " + "*" + " ]");}
+                    } else {
+                        if (value == null) {System.out.print("[ " + " " + " ]");}
+                        else {System.out.print("[ " + value.getSymbol() + " ]");}
+                    }
+                }
+                System.out.println("| " + num-- + " |");
+            }
+
+            System.out.println("\u2500".repeat(66));
+        } else {
+            System.out.println("( GameBoard " + ID + " ) " + "\u2500".repeat(50));
+            
+            Character x = 65;
+            int num = 1;
+
+            for (int i = 0; i < size; i++) {
+                System.out.print("| " + x++ + " |");
+            }
+            System.out.println();
+
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    Pieces value = this.getPiece(j,i);
+                    if (activePiece.isTileValid(rank, file, j, i)) {{System.out.print("[ " + "*" + " ]");}
+                    } else {
+                        if (value == null) {System.out.print("[ " + " " + " ]");}
+                        else {System.out.print("[ " + value.getSymbol() + " ]");}
+                    }
+                }
+                System.out.println("| " + num++ + " |");
+            }
+            System.out.println("\u2500".repeat(66));
+        }
+    }
+
     // Setters
 
     public void setPiece(int rank, int file, Pieces piece) {
@@ -162,18 +219,15 @@ public class Board {
 
     public void setBoard() {
         // White Pieces
-        this.setPiece(3, 0, k1); // White King
+        this.setPiece(4, 0, new ChessPieces.King(true));
+        this.setPiece(3, 0, new ChessPieces.Queen(true));
 
         // Black Pieces
-        this.setPiece(3, 7, k2); // Black King
+        this.setPiece(4, 7, new ChessPieces.King(false));
+        this.setPiece(3, 7, new ChessPieces.Queen(false));
     }
 
     public void setMoveHistory(int move) {
         MoveHistory.add(move);
-    }
-
-    public void highlightMoves(Pieces activePiece) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'highlightMoves'");
     }
 }

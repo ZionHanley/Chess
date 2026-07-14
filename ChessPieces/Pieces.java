@@ -23,10 +23,7 @@ public abstract class Pieces {
         return this.white;
     }
 
-    public boolean isTileValid(int starRank, int startFile, int endRank, int endFile) {
-        // Default implementation - can be overridden by subclasses
-        return true;
-    }
+    public abstract boolean isTileValid(int starRank, int startFile, int endRank, int endFile);
 
     //setters
 

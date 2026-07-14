@@ -8,6 +8,7 @@ public class GameState {
     Pieces activePiece;
     String command;
     boolean colorFlag = true;
+    boolean highlightFlag = false;
     int[] selection;
     int[] move;
 
@@ -19,7 +20,12 @@ public class GameState {
 
         clearScreen();
 
-        printBoard(colorFlag);
+        if (highlightFlag) {
+            myObjBoard.printHighlight(selection[0], selection[1], activePiece, colorFlag);
+            highlightFlag = false;
+        } else {
+            printBoard(colorFlag);
+        }
 
         System.out.print("Enter command | select | move | highlight | quit | ... "); command = System.console().readLine();
 
@@ -29,7 +35,7 @@ public class GameState {
                 if (activePiece == null) {
                     System.err.println("No Piece selected");
                 } else {
-                    myObjBoard.highlightMoves(activePiece);
+                    highlightFlag = true;
                 }
                 return;
             }
