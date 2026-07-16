@@ -221,10 +221,38 @@ public class Board {
         // White Pieces
         this.setPiece(4, 0, new ChessPieces.King(true));
         this.setPiece(3, 0, new ChessPieces.Queen(true));
+        this.setPiece(0, 0, new ChessPieces.Rook(true));
+        this.setPiece(7, 0, new ChessPieces.Rook(true));
+        this.setPiece(2, 0, new ChessPieces.Bishop(true));
+        this.setPiece(5, 0, new ChessPieces.Bishop(true));
+        this.setPiece(1, 0, new ChessPieces.Knight(true));
+        this.setPiece(6, 0, new ChessPieces.Knight(true));
+        this.setPiece(0, 1, new ChessPieces.Pawn(true));
+        this.setPiece(1, 1, new ChessPieces.Pawn(true));
+        this.setPiece(2, 1, new ChessPieces.Pawn(true));
+        this.setPiece(3, 1, new ChessPieces.Pawn(true));
+        this.setPiece(4, 1, new ChessPieces.Pawn(true));
+        this.setPiece(5, 1, new ChessPieces.Pawn(true));
+        this.setPiece(6, 1, new ChessPieces.Pawn(true));
+        this.setPiece(7, 1, new ChessPieces.Pawn(true));
 
         // Black Pieces
         this.setPiece(4, 7, new ChessPieces.King(false));
         this.setPiece(3, 7, new ChessPieces.Queen(false));
+        this.setPiece(0, 7, new ChessPieces.Rook(false));
+        this.setPiece(7, 7, new ChessPieces.Rook(false));
+        this.setPiece(2, 7, new ChessPieces.Bishop(false));
+        this.setPiece(5, 7, new ChessPieces.Bishop(false));
+        this.setPiece(1, 7, new ChessPieces.Knight(false));
+        this.setPiece(6, 7, new ChessPieces.Knight(false));
+        this.setPiece(7, 6, new ChessPieces.Pawn(false));
+        this.setPiece(6, 6, new ChessPieces.Pawn(false));
+        this.setPiece(5, 6, new ChessPieces.Pawn(false));
+        this.setPiece(4, 6, new ChessPieces.Pawn(false));
+        this.setPiece(3, 6, new ChessPieces.Pawn(false));
+        this.setPiece(2, 6, new ChessPieces.Pawn(false));
+        this.setPiece(1, 6, new ChessPieces.Pawn(false));
+        this.setPiece(0, 6, new ChessPieces.Pawn(false));
     }
 
     public void setMoveHistory(int move) {

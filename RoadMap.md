@@ -9,7 +9,7 @@ Foucusing on creating the board and the piece, for now this will all be shown in
     - Allow pieaces to capture others
     - ~~Have diffrent turns~~
     - Show captured pieces for each player
-    - Show highlighted possible moves for each piece
+    - ~~Show highlighted possible moves for each piece~~
     - Implement special moves
     - ~~Flip the board for the alternate perspective~~
 

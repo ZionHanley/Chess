@@ -25,9 +25,12 @@ public abstract class Pieces {
 
     public abstract boolean isTileValid(int starRank, int startFile, int endRank, int endFile);
 
-    //setters
+    public boolean isPathClear(int startRank, int startFile, int endRank, int endFile) {
+        // TODO: Implement path checking logic for pieces that move multiple tiles (like Rooks, Bishops, and Queens)
+        return true;
+    }
 
-    //TODO: Make a method for changing symbol incase of the chess haracters not being supported by the console.
+    //setters
 
     public void setSymbol(char symbol) {
         
