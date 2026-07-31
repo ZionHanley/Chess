@@ -1,4 +1,3 @@
-import ChessPieces.King;
 import ChessPieces.Pieces;
 import java.util.ArrayList;
 
@@ -15,9 +14,6 @@ public class Board {
     public boolean isCheckmate = false;
     public boolean whiteCastle = true;
     public boolean blackCastle = true;
-
-    King k1 = new King(true);
-    King k2 = new King(false);
 
     public Board() {
         ID++;

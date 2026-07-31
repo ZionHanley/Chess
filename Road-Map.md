@@ -1,13 +1,13 @@
-# RoadMap for continued development 
+# Road-map for continued development 
 
 ### Beta 0.1.1
 
-Foucusing on creating the board and the piece, for now this will all be shown in terminal but will eventually the data will be used to create a GUI on a weppage.
+Focusing on creating the board and the piece, for now this will all be shown in terminal but will eventually the data will be used to create a GUI on a wep-page.
     - ~~Create the Board~~
-    - Create pieces and thier movement abilies
-    - ~~Distingish team colors~~
-    - Allow pieaces to capture others
-    - ~~Have diffrent turns~~
+    - Create pieces and their movement abilities
+    - ~~Distinguish team colors~~
+    - Allow pieces to capture others
+    - ~~Have different turns~~
     - Show captured pieces for each player
     - ~~Show highlighted possible moves for each piece~~
     - Implement special moves
