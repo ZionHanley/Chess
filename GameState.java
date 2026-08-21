@@ -27,7 +27,7 @@ public class GameState {
             printBoard(colorFlag);
         }
 
-        System.out.print("Enter command | select | move | highlight | quit | ... "); command = System.console().readLine();
+        System.out.print("Enter command | select | move | highlight | pass | quit | ... "); command = System.console().readLine();
 
         switch (command.toLowerCase()) {
 
@@ -76,6 +76,11 @@ public class GameState {
                 }
             }
 
+            case "pass" -> {
+                switchTurns();
+                return;
+            }
+
             default -> { 
                 System.err.println("Invaliad command");
                 return;
@@ -121,7 +126,7 @@ public class GameState {
                     System.out.println("Invalid input. Please enter numbers only.");
                 }
             } else {
-                System.out.println("Invalid input format. Rank and File ie A 1");
+                System.out.println("Invalid input format. Rank and File ie \"A 1\"");
             }
         }
     }
