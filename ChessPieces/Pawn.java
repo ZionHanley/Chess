@@ -11,7 +11,9 @@ public class Pawn extends Pieces {
     public boolean isTileValid(int startRank, int startFile, int endRank, int endFile) {
         int fileDiff = Math.abs(endFile - startFile);
         int rankDiff = Math.abs(endRank - startRank);
-        if ((startFile == 1) && (this.isWhite()) || (startFile == 7) && !(this.isWhite())) {
+        boolean postion = startFile == 1 || startFile == 6;
+        
+        if (postion) {
             if (this.isWhite()) {
                 return ((fileDiff == 1) || (fileDiff == 2)) && ((rankDiff == 0) && endFile > startFile);
             } else {

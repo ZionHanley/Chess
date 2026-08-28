@@ -4,7 +4,7 @@
 
 Focusing on creating the board and the piece, for now this will all be shown in terminal but will eventually the data will be used to create a GUI on a wep-page.
     - ~~Create the Board~~
-    - Create pieces and their movement abilities
+    - ~~Create pieces and their movement abilities~~
     - ~~Distinguish team colors~~
     - Allow pieces to capture others
     - ~~Have different turns~~
