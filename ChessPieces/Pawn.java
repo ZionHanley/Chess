@@ -12,7 +12,8 @@ public class Pawn extends Pieces {
         int fileDiff = Math.abs(endFile - startFile);
         int rankDiff = Math.abs(endRank - startRank);
         boolean postion = startFile == 1 || startFile == 6;
-        
+        //TODO: Add capyour
+
         if (postion) {
             if (this.isWhite()) {
                 return ((fileDiff == 1) || (fileDiff == 2)) && ((rankDiff == 0) && endFile > startFile);

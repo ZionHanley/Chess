@@ -17,21 +17,12 @@ public abstract class Pieces {
         return this.symbol;
     }
 
-    //issers
+    //setters
 
     public boolean isWhite() {
         return this.white;
     }
-
     public abstract boolean isTileValid(int starRank, int startFile, int endRank, int endFile);
-
-    public boolean isPathClear(int startRank, int startFile, int endRank, int endFile) {
-        // TODO: Implement path checking logic for pieces that move multiple tiles (like Rooks, Bishops, and Queens)
-        return true;
-    }
-
-    //setters
-
     public void setSymbol(char symbol) {
         
         if (white) {

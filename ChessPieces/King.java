@@ -16,6 +16,6 @@ public class King extends Pieces{
         int fileDiff = Math.abs(endFile - startFile);
         int rankDiff = Math.abs(endRank - startRank);
 
-        return (fileDiff <= 1 && rankDiff <= 1) && !(fileDiff == 0 && rankDiff == 0) && isPathClear(startRank, startFile, endRank, endFile);
+        return (fileDiff <= 1 && rankDiff <= 1) && !(fileDiff == 0 && rankDiff == 0);
     }
 }

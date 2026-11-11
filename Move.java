@@ -1,0 +1,6 @@
+/**
+ * Move
+ */
+public class Move {
+
+}
